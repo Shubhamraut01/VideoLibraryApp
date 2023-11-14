@@ -1,11 +1,8 @@
 // require("dotenv").config({ path: "./env" });
 import dotenv from "dotenv";
 import express from "express";
-import mongoose from "mongoose";
 import { fileURLToPath } from "url";
-import cors from "cors";
 import path from "path";
-import { DB_NAME } from "./constants.js";
 import connectDB from "./db/connection.js";
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -13,7 +10,13 @@ const __dirname = path.dirname(__filename);
 
 dotenv.config({ path: path.join(__dirname, "../.env") });
 
-connectDB();
+connectDB()
+  .then(() => {
+    app.listen(process.env.PORT || 8000, () => {
+      console.log(`Listening on port ${process.env.PORT}`);
+    });
+  })
+  .catch((err) => console.log(`Error connecting to database ${err}`));
 
 /*
 (async () => {
