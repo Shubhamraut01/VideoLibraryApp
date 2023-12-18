@@ -1,10 +1,10 @@
 // require("dotenv").config({ path: "./env" });
 import dotenv from "dotenv";
-import express from "express";
+import { app } from "./app.js";
 import { fileURLToPath } from "url";
 import path from "path";
 import connectDB from "./db/connection.js";
-const app = express();
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
